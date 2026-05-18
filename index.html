@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B&R Power Washing — The Digital Gap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,700;1,900&family=Hanken+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/ScrollTrigger.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --c:#152B4F;--cd:#0D1E37;--cm:#1A3465;
+  --g:#B8943F;--gl:#D4AF5A;--gp:#EDD98A;
+  --cr:#F7F4EE;--crd:#E8E4DA;
+  --w:#fff;--r:#C0392B;--rl:#ff6b6b;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Hanken Grotesk',sans-serif;background:var(--cd);color:var(--w);overflow-x:hidden}
+
+/* HEADER */
+header{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;background:rgba(13,30,55,.9);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.06)}
+.h-brand{font-family:'Playfair Display',serif;font-size:13px;font-weight:900;color:var(--gl);letter-spacing:.03em}
+.h-tag{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+
+/* HERO — Card 1 */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:100px 28px 60px;background:var(--cd);text-align:center;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 35%,rgba(184,148,63,.09),transparent 72%);pointer-events:none}
+.h1-wrap{position:relative;z-index:1}
+.h1-line{overflow:hidden;display:block}
+.h1-line span{display:block;transform:translateY(105%)}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(48px,8vw,100px);font-weight:900;line-height:1.02;margin-bottom:28px}
+.hero h1 em{color:var(--gl);font-style:italic;display:block}
+.hero-deck{display:flex;justify-content:center;gap:2px;flex-wrap:wrap;margin-top:52px;max-width:680px}
+.hd-pill{flex:1;min-width:140px;padding:20px 16px;text-align:center;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09)}
+.hd-pill:first-child{border-radius:8px 0 0 8px}
+.hd-pill:last-child{border-radius:0 8px 8px 0}
+.hd-num{font-family:'Playfair Display',serif;font-size:clamp(30px,4vw,42px);font-weight:900;line-height:1;margin-bottom:5px}
+.hd-num.bad{color:var(--rl)}
+.hd-num.ok{color:var(--gl)}
+.hd-lbl{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.38)}
+.hero-scroll{margin-top:48px;display:flex;flex-direction:column;align-items:center;gap:6px;color:rgba(255,255,255,.22);font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;position:relative;z-index:1}
+.bounce{animation:bounce 2s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+
+/* PROOF — Card 2 */
+.proof{padding:90px 28px;background:var(--c);text-align:center}
+.section-tag{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--g);margin-bottom:16px}
+.proof h2{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,52px);font-weight:900;line-height:1.05;margin-bottom:10px}
+.proof-note{font-size:14px;color:rgba(255,255,255,.38);margin-bottom:52px}
+.phones{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;align-items:flex-start}
+.phone-item{display:flex;flex-direction:column;align-items:center;gap:14px;cursor:pointer;opacity:0;transform:translateY(24px)}
+.phone-shell{width:260px;background:#080808;border-radius:42px;padding:9px;box-shadow:0 0 0 1px #1e1e1e,0 0 0 2.5px #0d0d0d,0 28px 70px rgba(0,0,0,.65);transition:transform .3s ease,box-shadow .3s ease}
+.phone-item:hover .phone-shell{transform:translateY(-8px) scale(1.015);box-shadow:0 0 0 1px #1e1e1e,0 0 0 2.5px #0d0d0d,0 44px 90px rgba(0,0,0,.75)}
+.phone-inner{border-radius:34px;overflow:hidden;height:420px;background:#000;position:relative}
+.phone-inner img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .4s ease}
+.phone-item:hover .phone-inner img{transform:scale(1.03)}
+.phone-notch{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:64px;height:7px;background:#080808;border-radius:4px;z-index:2}
+.phone-badge{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 13px;border-radius:99px;display:inline-block}
+.phone-badge.bad{background:rgba(192,57,43,.18);color:#ff8a80;border:1px solid rgba(192,57,43,.28)}
+.phone-badge.warn{background:rgba(194,65,12,.18);color:#ffb347;border:1px solid rgba(194,65,12,.28)}
+.phone-badge.good{background:rgba(29,78,216,.18);color:#93c5fd;border:1px solid rgba(29,78,216,.28)}
+.phone-cap{font-size:12px;color:rgba(255,255,255,.32);line-height:1.4;text-align:center;max-width:200px}
+
+/* GAP — Card 3 */
+.gap{display:grid;grid-template-columns:1fr 1fr}
+@media(max-width:580px){.gap{grid-template-columns:1fr}}
+.gap-half{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 32px;text-align:center;min-height:70vh}
+.gap-half.left{background:var(--cr)}
+.gap-half.right{background:var(--cd)}
+.gap-tag{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:16px}
+.gap-half.left .gap-tag{color:var(--r)}
+.gap-half.right .gap-tag{color:var(--g)}
+.gap-num{font-family:'Playfair Display',serif;font-size:clamp(100px,18vw,180px);font-weight:900;line-height:.85;margin-bottom:20px}
+.gap-half.left .gap-num{color:var(--r)}
+.gap-half.right .gap-num{color:var(--gl)}
+.gap-desc{font-size:clamp(14px,2vw,17px);font-weight:500;max-width:220px;line-height:1.4}
+.gap-half.left .gap-desc{color:rgba(21,43,79,.6)}
+.gap-half.right .gap-desc{color:rgba(255,255,255,.45)}
+.gap-quote-row{background:var(--cm);padding:36px 32px;text-align:center}
+.gap-quote-row blockquote{font-family:'Playfair Display',serif;font-size:clamp(15px,2.2vw,20px);font-style:italic;color:rgba(255,255,255,.6);max-width:680px;margin:0 auto 10px;line-height:1.6}
+.gap-quote-row cite{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(184,148,63,.55);font-style:normal}
+
+/* INTENT — Card 4 */
+.intent-split{display:grid;grid-template-columns:1fr 1fr}
+@media(max-width:580px){.intent-split{grid-template-columns:1fr}}
+.intent-half{padding:80px 40px;display:flex;flex-direction:column;min-height:72vh}
+.intent-half.dd{background:#fff}
+.intent-half.dg{background:var(--c)}
+.itag{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:16px}
+.intent-half.dd .itag{color:rgba(192,57,43,.55)}
+.intent-half.dg .itag{color:var(--g)}
+.intent-h{font-family:'Playfair Display',serif;font-size:clamp(30px,4.5vw,48px);font-weight:900;line-height:1.04;margin-bottom:44px}
+.intent-half.dd .intent-h{color:var(--r)}
+.intent-half.dg .intent-h{color:var(--w)}
+.intent-big{font-family:'Playfair Display',serif;font-size:clamp(88px,16vw,172px);font-weight:900;line-height:.8;margin-bottom:18px}
+.intent-half.dd .intent-big{color:var(--r)}
+.intent-half.dg .intent-big{color:var(--gl)}
+.intent-big-sub{font-size:clamp(14px,1.8vw,17px);font-weight:500;line-height:1.45;max-width:300px;margin-bottom:auto;padding-bottom:36px}
+.intent-half.dd .intent-big-sub{color:rgba(21,43,79,.5)}
+.intent-half.dg .intent-big-sub{color:rgba(255,255,255,.44)}
+.intent-verdict{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:7px 14px;border-radius:6px;display:inline-block}
+.intent-verdict.cold{background:rgba(192,57,43,.1);color:var(--r)}
+.intent-verdict.warm{background:rgba(184,148,63,.12);color:var(--gl)}
+.intent-source{font-size:10px;font-weight:600;letter-spacing:.04em;margin-top:10px;opacity:.38}
+.intent-half.dd .intent-source{color:var(--c)}
+.intent-half.dg .intent-source{color:var(--w)}
+
+/* PIPELINE — Card 5 */
+.pipeline{padding:90px 28px;background:var(--cd)}
+.pipeline-inner{max-width:820px;margin:0 auto}
+.pipeline h2{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,52px);font-weight:900;line-height:1.05;margin-bottom:8px}
+.pipeline h2 em{color:var(--gl);font-style:italic}
+.pipeline-sub{font-size:14px;color:rgba(255,255,255,.35);margin-bottom:52px}
+.pl-tiers{display:flex;flex-direction:column;gap:10px}
+.pl-tier{border-radius:12px;padding:30px 34px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:24px;opacity:0;transform:translateY(28px)}
+@media(max-width:560px){.pl-tier{grid-template-columns:1fr;gap:14px}}
+.pl-tier.t-cold{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)}
+.pl-tier.t-warm{background:rgba(184,148,63,.07);border:1px solid rgba(184,148,63,.2)}
+.pl-tier.t-hot{background:var(--c);border:1px solid rgba(184,148,63,.32)}
+.pl-badge{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:4px 11px;border-radius:99px;display:inline-block;margin-bottom:10px}
+.pl-tier.t-cold .pl-badge{background:rgba(192,57,43,.15);color:#ff8a80}
+.pl-tier.t-warm .pl-badge{background:rgba(184,148,63,.15);color:var(--gl)}
+.pl-tier.t-hot .pl-badge{background:rgba(184,148,63,.22);color:var(--gl)}
+.pl-name{font-family:'Playfair Display',serif;font-size:clamp(20px,3vw,30px);font-weight:900;line-height:1.1;margin-bottom:8px}
+.pl-tier.t-cold .pl-name{color:rgba(255,255,255,.5)}
+.pl-tier.t-warm .pl-name,.pl-tier.t-hot .pl-name{color:var(--w)}
+.pl-desc{font-size:13px;line-height:1.6}
+.pl-tier.t-cold .pl-desc{color:rgba(255,255,255,.28)}
+.pl-tier.t-warm .pl-desc,.pl-tier.t-hot .pl-desc{color:rgba(255,255,255,.42)}
+.pl-right{text-align:right;flex-shrink:0}
+.pl-signal{font-family:'Playfair Display',serif;font-size:clamp(40px,6vw,60px);font-weight:900;line-height:1;white-space:nowrap}
+.pl-tier.t-cold .pl-signal{color:rgba(192,57,43,.55)}
+.pl-tier.t-warm .pl-signal{color:var(--gl)}
+.pl-tier.t-hot .pl-signal{color:var(--gl)}
+.pl-signal-lbl{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-top:4px;text-align:right}
+.pl-sum{margin-top:28px;background:rgba(184,148,63,.08);border:1px solid rgba(184,148,63,.2);border-radius:12px;padding:24px 34px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;opacity:0;transform:translateY(12px)}
+.pl-sum-num{font-family:'Playfair Display',serif;font-size:clamp(42px,7vw,64px);font-weight:900;color:var(--gl);line-height:1}
+.pl-sum-right .pl-sum-tag{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--g);margin-bottom:5px}
+.pl-sum-txt{font-size:13px;color:rgba(255,255,255,.3);max-width:320px;line-height:1.5}
+
+/* TIMELINE — Card 6 */
+.timeline{padding:90px 28px;background:var(--cr)}
+.timeline-inner{max-width:860px;margin:0 auto}
+.timeline h2{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,52px);font-weight:900;line-height:1.05;color:var(--c);margin-bottom:8px}
+.timeline .section-tag{color:rgba(138,110,46,.8)}
+.timeline-sub{font-size:14px;color:rgba(21,43,79,.4);margin-bottom:48px}
+.tl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+@media(max-width:680px){.tl-grid{grid-template-columns:1fr 1fr}}
+.tl-card{background:var(--w);border:1px solid var(--crd);padding:22px 20px;opacity:0;transform:translateY(18px)}
+.tl-card:first-child{border-radius:10px 0 0 10px}
+.tl-card:last-child{border-radius:0 10px 10px 0}
+@media(max-width:680px){.tl-card:nth-child(1){border-radius:10px 0 0 0}.tl-card:nth-child(2){border-radius:0 10px 0 0}.tl-card:nth-child(3){border-radius:0 0 0 10px}.tl-card:nth-child(4){border-radius:0 0 10px 0}}
+.tl-week{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--g);margin-bottom:10px}
+.tl-card h4{font-size:13px;font-weight:700;color:var(--c);margin-bottom:7px;line-height:1.3}
+.tl-card p{font-size:12px;color:rgba(21,43,79,.47);line-height:1.5}
+.tl-result{margin-top:10px;font-size:11px;font-weight:700;color:rgba(138,110,46,.8)}
+.timeline-note{margin-top:24px;background:var(--c);border-radius:10px;padding:20px 24px;display:flex;align-items:center;gap:12px}
+.timeline-note i{color:var(--gl);flex-shrink:0}
+.timeline-note p{font-size:13px;color:rgba(255,255,255,.6);line-height:1.5}
+.timeline-note strong{color:var(--gl)}
+
+/* CHART — Card 7 */
+.chart-section{padding:90px 28px;background:var(--cd)}
+.chart-inner{max-width:820px;margin:0 auto}
+.chart-section h2{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,52px);font-weight:900;line-height:1.05;margin-bottom:8px}
+.chart-sub{font-size:14px;color:rgba(255,255,255,.35);margin-bottom:40px}
+.proj-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px}
+@media(max-width:480px){.proj-cards{grid-template-columns:1fr}}
+.proj-c{padding:22px 24px;border-radius:8px}
+.proj-c.y1{background:var(--c)}
+.proj-c.y2{background:rgba(184,148,63,.07);border:1px solid rgba(184,148,63,.18)}
+.proj-yr{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.33);margin-bottom:6px}
+.proj-big{font-family:'Playfair Display',serif;font-size:42px;font-weight:900;color:var(--gl);line-height:1;margin-bottom:3px}
+.proj-desc{font-size:11px;color:rgba(255,255,255,.28)}
+.chart-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:24px}
+.cleg{display:flex;gap:16px;margin-bottom:18px;flex-wrap:wrap}
+.cleg-i{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:rgba(255,255,255,.42)}
+.cleg-d{width:10px;height:10px;border-radius:2px}
+.cleg-d.gb{background:var(--cm)}
+.cleg-d.se{background:var(--g)}
+.bars{display:flex;align-items:flex-end;gap:3px;height:140px;border-bottom:1px solid rgba(255,255,255,.09)}
+.bw{display:flex;flex-direction:column;align-items:center;flex:1;height:100%;justify-content:flex-end;gap:1px}
+.bs{width:100%;max-width:34px;transition:height .75s cubic-bezier(.4,0,.2,1);height:0}
+.bs.gb{background:var(--cm);border-radius:0}
+.bs.se{background:var(--g);border-radius:2px 2px 0 0}
+.xlabels{display:flex;gap:3px;margin-top:6px}
+.xlabels span{flex:1;font-size:8px;color:rgba(255,255,255,.22);text-align:center}
+
+/* PRICING — Card 8 */
+.pricing{padding:90px 28px;background:var(--cr)}
+.pricing-inner{max-width:820px;margin:0 auto}
+.pricing h2{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,52px);font-weight:900;line-height:1.05;color:var(--c);margin-bottom:8px}
+.pricing .section-tag{color:rgba(138,110,46,.8)}
+.pricing-sub{font-size:14px;color:rgba(21,43,79,.4);margin-bottom:44px}
+.price-rows{display:flex;flex-direction:column;gap:18px}
+.pr{opacity:0;transform:translateX(-14px)}
+.pr-head{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:7px}
+.pr-name{font-size:12px;font-weight:700;color:var(--c)}
+.pr-val{font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:var(--c)}
+.pr-track{height:7px;background:var(--crd);border-radius:99px;overflow:hidden;margin-bottom:5px}
+.pr-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--c),var(--g));width:0%;transition:width 1s cubic-bezier(.4,0,.2,1)}
+.pr-note{font-size:11px;color:rgba(21,43,79,.42)}
+.pricing-cta{margin-top:32px;background:var(--c);border-radius:10px;padding:24px 28px;display:flex;gap:14px;align-items:flex-start}
+.pricing-cta i{flex-shrink:0;color:var(--gl);margin-top:3px}
+.pricing-cta p{font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.6}
+.pricing-cta strong{color:var(--gl)}
+.pricing-cta em{color:rgba(255,255,255,.33);font-style:normal}
+
+/* BOTTOM — Card 9 */
+.bottom{min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:100px 28px;background:var(--cd);text-align:center}
+.bottom h2{font-family:'Playfair Display',serif;font-size:clamp(36px,6.5vw,72px);font-weight:900;line-height:1.04;margin-bottom:16px}
+.bottom h2 em{color:var(--gl);font-style:italic;display:block}
+.bottom-sub{font-size:15px;color:rgba(255,255,255,.38);max-width:440px;margin:0 auto 48px;line-height:1.7}
+.bq{max-width:580px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:28px 32px;text-align:left}
+.bq-head{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.bq-head i{color:var(--g);flex-shrink:0}
+.bq-tag{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.bq-body{font-family:'Playfair Display',serif;font-size:clamp(17px,2.8vw,24px);font-style:italic;color:rgba(255,255,255,.78);line-height:1.55;margin-bottom:8px}
+.bq-body strong{color:var(--gl);font-style:normal}
+.bq-src{font-size:10px;color:rgba(255,255,255,.25)}
+
+/* FOOTER */
+footer{background:var(--cd);border-top:1px solid rgba(255,255,255,.06);padding:24px 28px}
+footer p{font-size:10.5px;color:rgba(255,255,255,.18);line-height:1.8;max-width:820px}
+
+/* LIGHTBOX */
+.lb{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .28s ease;backdrop-filter:blur(10px)}
+.lb.on{opacity:1;pointer-events:all}
+.lb img{max-width:88vw;max-height:88vh;border-radius:14px;box-shadow:0 40px 120px rgba(0,0,0,.8);transform:scale(.92);transition:transform .28s ease}
+.lb.on img{transform:scale(1)}
+.lb-x{position:absolute;top:20px;right:20px;width:38px;height:38px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:var(--w);transition:background .2s}
+.lb-x:hover{background:rgba(255,255,255,.2)}
+
+@media(max-width:480px){
+  .phones{gap:20px}
+  .phone-shell{width:220px}
+  .phone-inner{height:360px}
+  .fbar-row{grid-template-columns:80px 1fr 80px}
+  .fbar-num{font-size:26px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="h-brand">B&R Power Washing</div>
+  <div class="h-tag">Digital Opportunity</div>
+</header>
+
+<!-- ─── CARD 1: HERO ─────────────────────────────── -->
+<section class="hero">
+  <div class="h1-wrap">
+    <h1>
+      <span class="h1-line"><span>Twenty years</span></span>
+      <span class="h1-line"><span>of real work.</span></span>
+      <span class="h1-line"><span><em>Zero online presence.</em></span></span>
+    </h1>
+  </div>
+  <div class="hero-deck" id="heroDeck">
+    <div class="hd-pill">
+      <div class="hd-num bad">0+</div>
+      <div class="hd-lbl">AI reads your experience as</div>
+    </div>
+    <div class="hd-pill">
+      <div class="hd-num ok" id="heroYears">0</div>
+      <div class="hd-lbl">Years you've actually operated</div>
+    </div>
+    <div class="hd-pill">
+      <div class="hd-num bad">#—</div>
+      <div class="hd-lbl">Houston search ranking</div>
+    </div>
+    <div class="hd-pill">
+      <div class="hd-num ok" style="font-size:22px;padding-top:8px">2–4 wks</div>
+      <div class="hd-lbl">To enter top 50</div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <i data-lucide="chevron-down" class="bounce" style="width:18px;height:18px;stroke-width:2"></i>
+    See the evidence
+  </div>
+</section>
+
+<!-- ─── CARD 2: PROOF ────────────────────────────── -->
+<section class="proof">
+  <div class="section-tag">We tested it</div>
+  <h2>Here's what came back.</h2>
+  <p class="proof-note">Three platforms. Same result every time.</p>
+  <div class="phones">
+
+    <div class="phone-item" onclick="lb(this)">
+      <div class="phone-shell">
+        <div class="phone-inner">
+          <div class="phone-notch"></div>
+          <img src="assets/screenshots/google-search-results.png"
+               alt="Google search: power washing Houston — BNR not in top 50">
+        </div>
+      </div>
+      <span class="phone-badge bad">Not in top 50</span>
+      <p class="phone-cap">Google · "power washing Houston"<br>Tap to expand</p>
+    </div>
+
+    <div class="phone-item" onclick="lb(this)">
+      <div class="phone-shell">
+        <div class="phone-inner">
+          <div class="phone-notch"></div>
+          <img src="assets/screenshots/perplexity-0-years.png"
+               alt="Perplexity AI reads 0+ years experience">
+        </div>
+      </div>
+      <span class="phone-badge warn">Reads 0 years</span>
+      <p class="phone-cap">Perplexity · "years of experience?"<br>Tap to expand</p>
+    </div>
+
+    <div class="phone-item" onclick="lb(this)">
+      <div class="phone-shell">
+        <div class="phone-inner">
+          <div class="phone-notch"></div>
+          <img src="assets/screenshots/chatgpt-valuation.png"
+               alt="ChatGPT values rebuild at $25K–$100K per year">
+        </div>
+      </div>
+      <span class="phone-badge good">$25K–$100K/yr upside</span>
+      <p class="phone-cap">ChatGPT · rebuild valuation<br>Tap to expand</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── CARD 3: THE GAP ──────────────────────────── -->
+<div class="gap">
+  <div class="gap-half left">
+    <div class="gap-tag">What AI reads</div>
+    <div class="gap-num" id="gapBad">0+</div>
+    <div class="gap-desc">Years of experience, per every AI crawling your site</div>
+  </div>
+  <div class="gap-half right">
+    <div class="gap-tag">What's actually true</div>
+    <div class="gap-num" id="gapGood">0</div>
+    <div class="gap-desc">Years in business — proven, documented, real</div>
+  </div>
+</div>
+<div class="gap-quote-row">
+  <blockquote>"The homepage shows a 'Years of Experience' counter that appears to display '0 +' — likely a dynamic counter that didn't load properly in the search snapshot."</blockquote>
+  <cite>Perplexity AI · queried bnrassociatesllc.com · May 2026</cite>
+</div>
+
+<!-- ─── CARD 4: INTENT ───────────────────────────── -->
+<div class="intent-split">
+  <div class="intent-half dd">
+    <div class="itag">Door to door</div>
+    <h3 class="intent-h">Wrong person.<br>Wrong time.</h3>
+    <div class="intent-big">~87<span style="font-size:.38em;vertical-align:middle;opacity:.75">%</span></div>
+    <div class="intent-big-sub">of cold residential contacts don't convert — they weren't looking, weren't ready, or won't remember to call back</div>
+    <div class="intent-source">Direct Selling Assoc. · 2023 field data · home services canvassing</div>
+    <div class="intent-verdict cold">Cold prospect &middot; no intent signal</div>
+  </div>
+  <div class="intent-half dg">
+    <div class="itag">Search discovery</div>
+    <h3 class="intent-h">Right person.<br>Right now.</h3>
+    <div class="intent-big">73<span style="font-size:.38em;vertical-align:middle;opacity:.75">%</span></div>
+    <div class="intent-big-sub">of home service searchers hire a contractor within 7 days of searching — they're not window shopping, they need it done</div>
+    <div class="intent-source">HomeAdvisor Local Services Report · 2023</div>
+    <div class="intent-verdict warm">Buying mode &middot; decision already made</div>
+  </div>
+</div>
+
+<!-- ─── CARD 5: THE PIPELINE ─────────────────────── -->
+<section class="pipeline">
+  <div class="pipeline-inner">
+    <div class="section-tag">One website. Three ways to win.</div>
+    <h2>Stop chasing.<br><em>Start getting found.</em></h2>
+    <p class="pipeline-sub">Lead quality ladder &mdash; D2D vs. what a site actually produces</p>
+    <div class="pl-tiers">
+
+      <div class="pl-tier t-cold">
+        <div>
+          <div class="pl-badge">Door to door</div>
+          <div class="pl-name">"Call me later."</div>
+          <div class="pl-desc">They weren't looking. You knocked on the wrong day. Even if they're interested, they might need it in three weeks — so you're banking on them remembering to call you back.</div>
+        </div>
+        <div class="pl-right">
+          <div class="pl-signal">~2.3%</div>
+          <div class="pl-signal-lbl">D2D close avg · DSA '23</div>
+        </div>
+      </div>
+
+      <div class="pl-tier t-warm">
+        <div>
+          <div class="pl-badge">Warm lead</div>
+          <div class="pl-name">They submitted a quote.</div>
+          <div class="pl-desc">They found you. They liked the site. They handed you their number. When you call them, they actually want to hear from you — that's a completely different conversation.</div>
+        </div>
+        <div class="pl-right">
+          <div class="pl-signal">6.7×</div>
+          <div class="pl-signal-lbl">vs cold · Salesforce SotS '23</div>
+        </div>
+      </div>
+
+      <div class="pl-tier t-hot">
+        <div>
+          <div class="pl-badge">Instant close</div>
+          <div class="pl-name">They booked through the site.</div>
+          <div class="pl-desc">No sales call. No follow-up. They compared their options, chose B&R, and put money down. Job is on the calendar. Go to work.</div>
+        </div>
+        <div class="pl-right">
+          <div class="pl-signal">$0</div>
+          <div class="pl-signal-lbl">cost to close</div>
+        </div>
+      </div>
+
+    </div>
+    <div class="pl-sum">
+      <div class="pl-sum-num">$1,750</div>
+      <div class="pl-sum-right">
+        <div class="pl-sum-tag">Month 1 &middot; from search alone</div>
+        <div class="pl-sum-txt">7 jobs &middot; $250 avg &middot; conservative · before rankings and reviews compound</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CARD 6: TIMELINE ─────────────────────────── -->
+<section class="timeline">
+  <div class="timeline-inner">
+    <div class="section-tag">The path in</div>
+    <h2>Top 50 in Houston.<br>Four weeks.</h2>
+    <p class="timeline-sub">Foundational work — done once, permanent.</p>
+    <div class="tl-grid">
+      <div class="tl-card">
+        <div class="tl-week">Week 1</div>
+        <h4>GBP Claim &amp; Optimization</h4>
+        <p>Verify profile, complete all fields, service areas, photos, categories.</p>
+        <div class="tl-result">→ Indexed by Google</div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-week">Week 1–2</div>
+        <h4>Citation Consistency</h4>
+        <p>Match NAP exactly across 40+ directories — Yelp, Angi, HomeAdvisor, BBB.</p>
+        <div class="tl-result">→ Trust signals fire</div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-week">Week 2</div>
+        <h4>Site Structure</h4>
+        <p>Fix counter DOM value, schema markup, title tags, service-area pages.</p>
+        <div class="tl-result">→ AI reads you correctly</div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-week">Week 3–4</div>
+        <h4>Review Activation</h4>
+        <p>5 solid reviews from existing customers moves rankings measurably.</p>
+        <div class="tl-result">→ Top 50 · climbing to top 10</div>
+      </div>
+    </div>
+    <div class="timeline-note">
+      <i data-lucide="trending-up" style="width:20px;height:20px;stroke-width:1.75"></i>
+      <p>The businesses <strong>dominating Houston power washing search</strong> started exactly here. The gap is infrastructure — and infrastructure is fixable in weeks, not years.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CARD 7: PROJECTIONS + CHART ──────────────── -->
+<section class="chart-section">
+  <div class="chart-inner">
+    <div class="section-tag">18-month projection</div>
+    <h2>GBP gets you in.<br>SEO makes you permanent.</h2>
+    <p class="chart-sub">Jobs per month · Google Business Profile + organic SEO · stacked</p>
+    <div class="proj-cards">
+      <div class="proj-c y1">
+        <div class="proj-yr">Year 1 cumulative</div>
+        <div class="proj-big">~$25K</div>
+        <div class="proj-desc">GBP-led growth, SEO seeding</div>
+      </div>
+      <div class="proj-c y2">
+        <div class="proj-yr">Year 2 cumulative</div>
+        <div class="proj-big">~$45K</div>
+        <div class="proj-desc">Established rankings · review flywheel active</div>
+      </div>
+    </div>
+    <div class="chart-box">
+      <div class="cleg">
+        <div class="cleg-i"><span class="cleg-d gb"></span>GBP jobs</div>
+        <div class="cleg-i"><span class="cleg-d se"></span>SEO jobs</div>
+      </div>
+      <div class="bars" id="bars"></div>
+      <div class="xlabels" id="xlabels"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CARD 8: PRICING ──────────────────────────── -->
+<section class="pricing">
+  <div class="pricing-inner">
+    <div class="section-tag">Market pricing</div>
+    <h2>What the market charges.</h2>
+    <p class="pricing-sub">Third-party rates · Clutch, Upwork, WebFX · May 2026</p>
+    <div class="price-rows">
+      <div class="pr">
+        <div class="pr-head">
+          <span class="pr-name">New Website — Freelancer / Small Team</span>
+          <span class="pr-val">$8,500–$15,000</span>
+        </div>
+        <div class="pr-track"><div class="pr-fill" data-w="35"></div></div>
+        <div class="pr-note">Custom design, mobile-responsive, basic SEO · 4–8 weeks</div>
+      </div>
+      <div class="pr">
+        <div class="pr-head">
+          <span class="pr-name">New Website — Legitimate Agency</span>
+          <span class="pr-val">$18,000–$35,000+</span>
+        </div>
+        <div class="pr-track"><div class="pr-fill" data-w="72"></div></div>
+        <div class="pr-note">Full brand system, SEO architecture, service-area pages · 8–16 weeks</div>
+      </div>
+      <div class="pr">
+        <div class="pr-head">
+          <span class="pr-name">GBP Optimization (one-time)</span>
+          <span class="pr-val">$500–$1,500</span>
+        </div>
+        <div class="pr-track"><div class="pr-fill" data-w="10"></div></div>
+        <div class="pr-note">Profile completion, categories, citations, photos</div>
+      </div>
+      <div class="pr">
+        <div class="pr-head">
+          <span class="pr-name">Monthly SEO Retainer</span>
+          <span class="pr-val">$500–$2,000/mo</span>
+        </div>
+        <div class="pr-track"><div class="pr-fill" data-w="20"></div></div>
+        <div class="pr-note">GBP posts, citations, rank tracking, content, reporting</div>
+      </div>
+    </div>
+    <div class="pricing-cta">
+      <i data-lucide="message-circle" style="width:18px;height:18px;stroke-width:1.75"></i>
+      <p><strong>ChatGPT's assessment:</strong> "Likely <strong>$25,000–$100,000/year</strong> in incremental gross revenue if the site gets traffic and the business follows up quickly." <em>— ChatGPT, May 2026</em></p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CARD 9: BOTTOM LINE ──────────────────────── -->
+<section class="bottom">
+  <h2>Twenty years of work.<br><em>None of it visible.</em></h2>
+  <p class="bottom-sub">A fixable problem. Infrastructure, not experience. Weeks, not years.</p>
+  <div class="bq">
+    <div class="bq-head">
+      <i data-lucide="message-circle" style="width:15px;height:15px;stroke-width:2"></i>
+      <span class="bq-tag">ChatGPT — Verbatim</span>
+    </div>
+    <div class="bq-body">"Better site: <strong>no real debate.</strong> Annual business value: likely <strong>$25,000–$100,000/year</strong> in incremental gross revenue."</div>
+    <div class="bq-src">ChatGPT · analysis of bnrassociatesllc.com · May 2026</div>
+  </div>
+</section>
+
+<footer>
+  <p>Sources: BrightLocal 2024 · Backlinko CTR Study · ProMatcher Houston data · SOCi Local Search Report 2024 · Perplexity AI (May 2026) · ChatGPT site analysis (May 2026) · Clutch.co · Upwork · WebFX. Funnel projections are conservative benchmarks. All pricing reflects third-party market rates only.</p>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lbox" onclick="lbClose()">
+  <img id="lbImg" src="" alt="">
+  <div class="lb-x" onclick="lbClose()">✕</div>
+</div>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+lucide.createIcons();
+
+/* HERO TEXT */
+window.addEventListener('load',function(){
+  var lines=document.querySelectorAll('.h1-line span');
+  gsap.to(lines,{y:'0%',duration:1.1,ease:'power4.out',stagger:.13,delay:.15});
+  gsap.fromTo('#heroDeck',{opacity:0,y:20},{opacity:1,y:0,duration:.9,delay:.9,ease:'power3.out'});
+  gsap.fromTo('.hero-scroll',{opacity:0},{opacity:1,duration:.7,delay:1.4});
+});
+/* hero parallax */
+gsap.to('.h1-wrap',{
+  yPercent:22,ease:'none',
+  scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}
+});
+
+/* HERO YEARS */
+(function(){
+  var el=document.getElementById('heroYears');
+  var o={v:0};
+  gsap.to(o,{v:20,duration:1.6,ease:'power3.out',delay:1,
+    onUpdate:function(){el.textContent=Math.round(o.v)+'+'}
+  });
+})();
+
+/* PHONES */
+gsap.utils.toArray('.phone-item').forEach(function(el,i){
+  gsap.to(el,{opacity:1,y:0,duration:.65,delay:i*.14,ease:'power3.out',
+    scrollTrigger:{trigger:el,start:'top 88%',once:true}
+  });
+});
+
+/* GAP */
+ScrollTrigger.create({trigger:'.gap',start:'top 72%',once:true,onEnter:function(){
+  var el=document.getElementById('gapGood');
+  var o={v:0};
+  gsap.to(o,{v:20,duration:1.8,ease:'power3.out',delay:.3,
+    onUpdate:function(){el.innerHTML=Math.round(o.v)+'<span style="font-size:.38em">+</span>'}
+  });
+}});
+
+/* INTENT */
+ScrollTrigger.create({trigger:'.intent-split',start:'top 75%',once:true,onEnter:function(){
+  gsap.fromTo('.intent-half.dd',{opacity:0,x:-32},{opacity:1,x:0,duration:.8,ease:'power3.out'});
+  gsap.fromTo('.intent-half.dg',{opacity:0,x:32},{opacity:1,x:0,duration:.8,ease:'power3.out',delay:.12});
+}});
+
+/* PIPELINE TIERS */
+gsap.utils.toArray('.pl-tier').forEach(function(el,i){
+  gsap.to(el,{opacity:1,y:0,duration:.65,ease:'power3.out',
+    scrollTrigger:{trigger:el,start:'top 88%',once:true,delay:i*.12}
+  });
+});
+ScrollTrigger.create({trigger:'.pl-sum',start:'top 90%',once:true,onEnter:function(){
+  gsap.to('.pl-sum',{opacity:1,y:0,duration:.65,ease:'power3.out'});
+}});
+gsap.set('.pl-sum',{y:14});
+
+/* TIMELINE */
+gsap.utils.toArray('.tl-card').forEach(function(el,i){
+  gsap.to(el,{opacity:1,y:0,duration:.55,delay:i*.1,ease:'power2.out',
+    scrollTrigger:{trigger:el,start:'top 88%',once:true}
+  });
+});
+
+/* BAR CHART */
+(function(){
+  var data=[[1,0],[2,0],[3,0],[4,0],[4,1],[5,1],[5,2],[5,2],
+    [5,3],[5,3],[5,4],[5,4],[5,5],[5,5],[5,6],[6,6],[6,7],[6,8]];
+  var labels=['M1','M2','M3','M4','M5','M6','M7','M8','M9','M10','M11','M12','M13','M14','M15','M16','M17','M18'];
+  var maxT=14,maxH=120;
+  var cont=document.getElementById('bars');
+  var xlab=document.getElementById('xlabels');
+  if(!cont)return;
+  var bars=[];
+  data.forEach(function(d){
+    var w=document.createElement('div');w.className='bw';
+    var se=document.createElement('div');se.className='bs se';se.style.height='0px';
+    var gb=document.createElement('div');gb.className='bs gb';gb.style.height='0px';
+    w.appendChild(se);w.appendChild(gb);cont.appendChild(w);
+    bars.push({gb:gb,se:se,gv:d[0],sv:d[1]});
+  });
+  labels.forEach(function(l){var s=document.createElement('span');s.textContent=l;xlab.appendChild(s);});
+  ScrollTrigger.create({trigger:cont,start:'top 85%',once:true,onEnter:function(){
+    bars.forEach(function(b,i){
+      setTimeout(function(){
+        b.gb.style.height=((b.gv/maxT)*maxH)+'px';
+        b.se.style.height=((b.sv/maxT)*maxH)+'px';
+      },i*50);
+    });
+  }});
+})();
+
+/* PRICING BARS */
+gsap.utils.toArray('.pr').forEach(function(el,i){
+  gsap.to(el,{opacity:1,x:0,duration:.6,delay:i*.1,ease:'power3.out',
+    scrollTrigger:{trigger:el,start:'top 88%',once:true,
+      onEnter:function(){
+        var f=el.querySelector('.pr-fill');
+        if(f) f.style.width=f.getAttribute('data-w')+'%';
+      }
+    }
+  });
+});
+
+/* LIGHTBOX */
+function lb(el){
+  var img=el.querySelector('img');
+  if(!img)return;
+  document.getElementById('lbImg').src=img.src;
+  document.getElementById('lbox').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+function lbClose(){
+  document.getElementById('lbox').classList.remove('on');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')lbClose();});
+document.getElementById('lbox').addEventListener('click',function(e){
+  if(e.target===this) lbClose();
+});
+</script>
+</body>
+</html>
